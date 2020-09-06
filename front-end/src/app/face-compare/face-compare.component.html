@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div *ngIf="sourceImage">
+            <h1><span class="badge badge-pill badge-primary">Source Image: {{sourceImage}}</span></h1>
+            <p><img [src]="imageURL" width="360" height="480"></p>
+          </div>
+        </div>
+        <div class="float-right">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Select Image</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu">
+              <button ngbDropdownItem *ngFor="let image of images" (click)="selectImage(image.key)">{{ image.key }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,10 @@ service: biometrics
 plugins:
   - serverless-offline
 
+custom: 
+  serverless-offline:
+    useChildProcesses: true
+
 frameworkVersion: '1'
 
 provider:
@@ -30,14 +34,14 @@ provider:
   region: us-east-1
 
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - s3:*
-      Resource: "*"
-    - Effect: "Allow"
-      Action:
-        - "rekognition:*"
-      Resource: "*"
+  - Effect: Allow
+    Action:
+    - s3:*
+    Resource: "*"
+  - Effect: "Allow"
+    Action:
+    - "rekognition:*"
+    Resource: "*"
 
 # you can define service wide environment variables here
 #  environment:
@@ -53,14 +57,20 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
+  image:
+    handler: controllers/imageController.getImgs
+    events:
+    - http:
+        path: images
+        method: get
   create-template:
-    handler: handler.hello
+    handler: controllers/faceRekController.faceCompare
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
     - http:
-        path: create-template
+        path: faceCompare
         method: get
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}

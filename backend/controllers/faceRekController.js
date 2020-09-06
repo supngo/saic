@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const BUCKET_NAME = 'thombasin';
 
-module.exports.hello = async event => {
+module.exports.faceCompare = async event => {
   const s3Config = { 
     Bucket: BUCKET_NAME,
     Prefix: 'faces' 
@@ -29,7 +29,6 @@ module.exports.hello = async event => {
         Name: imgList[1]
       }
     },
-    // QualityFilter: NONE,
     SimilarityThreshold: '10'
   };
 
