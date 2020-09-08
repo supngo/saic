@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
-  "dependencies": {},
+  "dependencies": {
+    "is-base64": "^1.1.0",
+    "uuid": "^8.3.0"
+  },
   "devDependencies": {
     "serverless": "^1.61.3",
     "serverless-offline": "^6.7.0",
