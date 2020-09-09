@@ -12,16 +12,55 @@ const s3Config = {
   Prefix: 'faces' 
 }
 
-module.exports.getImages = async () => {
+module.exports.getImageList = async () => {
   try {
-    const result = await s3.listObjects(s3Config).promise();
-    const imgList = result.Contents
+    const s3list = await s3.listObjects(s3Config).promise();
+    const imgList = s3list.Contents
       .filter(img => img.Key.indexOf('png') > 0)
       .map(img => img.Key.split('/')[1]);
-    return response.rsResponse(200, { images: imgList });
+    // let imagesPromises = [];
+    // let resultimages = [];
+    // imgList.forEach(key => {
+    //   imagesPromises.push(s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: key}).promise());
+    // });
+    // imgList.forEach(key => {
+    //   s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: key, InlineData: true}, function(err, data) {
+    //     if (err) console.log(err, err.stack); // an error occurred
+    //     else {
+    //       images.push(new Image(data.Body, BUCKET_NAME, key));
+    //     }
+
+    //   // const response = s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: key, InlineData: true}).promise();
+    //   // images.push(new Image(response.Body, BUCKET_NAME, key));
+    //   });
+    // }
+
+    // const result = await Promise.all(imagesPromises);
+    // result.forEach(image => images.push(new Image(image.Body, BUCKET_NAME, )))
+    // const base64 = await s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: imgList[0]}).promise();
+    // console.log(result);
+
+    // let data = 'stackabuse.com';
+    // let buff = new Buffer(data);
+    // let base64data = buff.toString('base64');
+    // console.log(buff);
+    // console.log(base64data);
+
+    return response.rsResponse(200, {images: imgList});
   } catch (e) {
     console.log(e.stack);
     return response.rsResponse(500, 'Internal Server Error');
+  }
+};
+
+module.exports.getImage = async event => {
+  const key = event.queryStringParameters.key;
+  try{ 
+    const image = await s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: key}).promise();
+    return response.rsResponse(200, {image: image.Body.toString('base64')});
+  } catch (e) {
+    console.log(e.stack);
+    return response.rsResponse(400, 'Invalid Key');
   }
 };
 

@@ -4,14 +4,17 @@ const s3 = new AWS.S3();
 const BUCKET_NAME = 'thombasin';
 
 module.exports.faceCompare = async event => {
+  const payload = JSON.parse(event.body);
+  const sourceTemplate = payload.SingleTemplate;
+  const targetTemplates = payload.TemplateList;
   const s3Config = { 
     Bucket: BUCKET_NAME,
     Prefix: 'faces' 
   }
-  const response = await s3.listObjects(s3Config).promise();
-  const imgList = response.Contents
-    .filter(img => img.Key.indexOf('png') > 0)
-    .map(img => img.Key);
+  // const response = await s3.listObjects(s3Config).promise();
+  // const imgList = response.Contents
+  //   .filter(img => img.Key.indexOf('png') > 0)
+  //   .map(img => img.Key);
 
   const rekognition = new AWS.Rekognition({apiVersion: '2016-06-27'});
   const sourceImg = imgList[0];

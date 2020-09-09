@@ -6,6 +6,7 @@
           <div *ngIf="sourceImage">
             <h1><span class="badge badge-pill badge-primary">Source Image: {{sourceImage}}</span></h1>
             <p><img [src]="imageURL" width="360" height="480"></p>
+            <button class="btn btn-success" id="analyze" (click)="analyzeImage()">Analyse</button>
           </div>
         </div>
         <div class="float-right">

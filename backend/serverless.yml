@@ -63,11 +63,17 @@ functions:
     - http:
         path: v1/info
         method: get
-  image:
-    handler: controllers/imageController.getImages
+  image-list:
+    handler: controllers/imageController.getImageList
     events:
     - http:
         path: v1/images
+        method: get
+  image:
+    handler: controllers/imageController.getImage
+    events:
+    - http:
+        path: v1/image
         method: get
   create-template:
     handler: controllers/imageController.createTemplate
@@ -75,9 +81,9 @@ functions:
     - http:
         path: v1/create-template
         method: post
-  compare:
+  compare-list:
     handler: controllers/faceRekController.faceCompare
     events:
     - http:
         path: faceCompare
-        method: get
+        method: post
