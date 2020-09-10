@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <div class="container">
   <div class="card">
     <div class="card-body">
@@ -5,7 +6,7 @@
         <div class="col">
           <div *ngIf="sourceImage">
             <h1><span class="badge badge-pill badge-primary">Source Image: {{sourceImage}}</span></h1>
-            <p><img [src]="imageURL" width="360" height="480"></p>
+            <p><img [src]="imageBase64" width="360" height="480"></p>
             <button class="btn btn-success" id="analyze" (click)="analyzeImage()">Analyse</button>
           </div>
         </div>
@@ -20,4 +21,35 @@
       </div>
     </div>
   </div>
+  <br/>
+  <div *ngIf="targetImages.length > 0 && isLoaded">
+    <div class="card card-style1" *ngFor="let image of targetImages">
+      <div class="card-body">
+        <div class="col">
+          <div class="row">
+            <div class="col col-style1">
+              Score:&nbsp;<span class="badge badge-info badge-style1">{{image.score}}</span><br/>
+              Normalized Score:&nbsp;<span class="badge badge-success">{{image.normalizedScore}}</span>
+            </div>
+          </div>
+          <p><img [src]="image.data" width="240" height="320"></p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card" *ngIf="targetImages.length > 0">
+    <div class="card-body">
+      <div class="row" *ngFor="let image of targetImages">
+        <div class="col">
+          <div class="row">
+            <div class="col col-style1">
+              Score:&nbsp;<span class="badge badge-info badge-style1">{{image.score}}</span>
+              Normalized Score:&nbsp;<span class="badge badge-success">{{image.normalizedScore}}</span>
+            </div>
+          </div>
+          <p><img [src]="image.data" width="240" height="320"></p>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </div>

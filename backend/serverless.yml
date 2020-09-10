@@ -85,5 +85,5 @@ functions:
     handler: controllers/faceRekController.faceCompare
     events:
     - http:
-        path: faceCompare
+        path: v1/compare-list
         method: post

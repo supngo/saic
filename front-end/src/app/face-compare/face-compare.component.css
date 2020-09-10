@@ -5,5 +5,20 @@
 
 .card {
   background-color: #EBF5FB;
+  margin-bottom: 10px;
+}
+
+.col-style1 {
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+.badge-style1 {
+  margin-right: 5px;
+}
+
+.card-style1 {
+  background-color: #EBF5FB;
+  margin-bottom: 10px;
 }
 

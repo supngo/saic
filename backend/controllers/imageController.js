@@ -67,7 +67,7 @@ module.exports.getImage = async event => {
 module.exports.createTemplate = async event => {
   try {
     const payload = JSON.parse(event.body);
-    const image = new Image(payload.imageData, null, payload.name);
+    const image = new Image(payload.imageData, null, payload.key);
     const template = new Template();
     if(!image.imageData || !isBase64(image.imageData, { mimeRequired: true })) {
       console.log('Empty or Invalid Image Base64!');
