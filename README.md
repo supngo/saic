@@ -33,6 +33,23 @@ Deploying this set up on AWS is also a easy thinking process. AWS offers so many
 7. IAM for permission and cloud security
 
 ### Explore (Run and Test)
+#### Run Locally
+1. Checkout the source code at https://github.com/supngo/saic.git
+2. Open the terminal at the checked out folder
+3. Run Back end
+```
+cd back-end
+npm install
+sls serverless start
+```
+4. Run Front end
+```
+cd front-end
+npm install
+ng serve
+```
+5. Open the browser at http://localhost:4200
+#### Test the same application online
 1. Go to this site: https://prosopa.info
 2. Select an image from a dropdown
 3. Click ***Analyze*** to run Face Recognition against other images
