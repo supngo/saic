@@ -1,12 +1,18 @@
 # Back End
 
-## To install
+## Requirements:
+1. nodeJS
+2. npm
+3. serverless
+4. AWS account
+
+## Install
 Run `npm install`
 
 ## Development server
 Run `sls offline start` for a dev server. Navigate to `http://localhost:3000/`
 
-## To deploy
+## Deploy
 Run `sls deploy`
 
 ## End points
@@ -50,6 +56,7 @@ This end point retrives the image source (template) from the server
 ```
 {
   "image": "iVBORw0KGgoAAAANSUhEUgAAAwAAAAPACAIAAAANC4ltAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4nJS925LruLItNkaCql77yf//AQ57R9gnwv4077N6VklEDj/kBSCl6m0zOmZLKhIEEnm/gf/X//mfAEiiLkkAJsw8f6cAgC4Af/......
+}
 ```
 
 ### ***4. /v1/create-template POST***
