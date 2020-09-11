@@ -32,8 +32,8 @@ Deploying this set up on AWS is also a easy thinking process. AWS offers so many
 6. IAM for permission and cloud security
 
 ### Explore (Run and Test)
-1. Go to this site: `https://prosopa.com`
-2. Select image from a dropdown
+1. Go to this site: https://prosopa.com
+2. Select an image from a dropdown
 3. Click ***Analyze*** to run Face Recognition against other images
 4. Click ***Upload*** to go to upload page
 5. Select an image from local PC and Upload
