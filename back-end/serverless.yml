@@ -32,6 +32,8 @@ provider:
   timeout: 10
   stage: dev
   region: us-east-1
+  environment:
+    BUCKET_NAME: ${opt:bucket}
 
   iamRoleStatements:
   - Effect: Allow
@@ -42,19 +44,6 @@ provider:
     Action:
     - "rekognition:*"
     Resource: "*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
 
 functions:
   info:

@@ -10,10 +10,10 @@
 Run `npm install`
 
 ## Development server
-Run `sls offline start` for a dev server. Navigate to `http://localhost:3000/`
+Run `sls offline start --bucket your_bucket_name` for a dev server. Navigate to `http://localhost:3000/`
 
 ## Deploy
-Run `sls deploy`
+Run `sls deploy --bucket your_bucket_name`
 
 ## End points
 ### ***1. /v1/info GET***

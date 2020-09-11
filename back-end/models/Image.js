@@ -1,10 +1,11 @@
 'use strict';
 const { v4: uuidv4 } = require('uuid');
+const BUCKET_NAME = process.env.BUCKET_NAME
 
 class Image {
   constructor(imageData, bucket, key) {
     this.imageData = imageData;
-    this.bucket = bucket || 'thombasin/faces';
+    this.bucket = bucket || BUCKET_NAME;
     this.key = key || uuidv4();
   }
 }

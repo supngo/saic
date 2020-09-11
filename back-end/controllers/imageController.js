@@ -3,19 +3,19 @@ const AWS = require('aws-sdk');
 const isBase64 = require('is-base64');
 const response = require('../models/Response.js');
 const s3 = new AWS.S3();
-const BUCKET_NAME = 'thombasin';
+const BUCKET_NAME = process.env.BUCKET_NAME;
 
 const s3Config = { 
-  Bucket: BUCKET_NAME,
-  Prefix: 'faces' 
+  Bucket: BUCKET_NAME
 }
 
 module.exports.getImageList = async () => {
   try {
     const s3list = await s3.listObjects(s3Config).promise();
+    console.log(s3list.Contents);
     const imgList = s3list.Contents
       .filter(img => img.Key.indexOf('png') > 0 || img.Key.indexOf('jpeg') > 0 || img.Key.indexOf('jpg') > 0)
-      .map(img => img.Key.split('/')[1]);
+      .map(img => img.Key);
     return response.rsResponse(200, {images: imgList});
   } catch (e) {
     console.log(e.stack);
@@ -26,7 +26,7 @@ module.exports.getImageList = async () => {
 module.exports.getImage = async event => {
   const key = event.queryStringParameters.key;
   try{ 
-    const image = await s3.getObject({Bucket: BUCKET_NAME+'/faces', Key: key}).promise();
+    const image = await s3.getObject({Bucket: BUCKET_NAME, Key: key}).promise();
     return response.rsResponse(200, {image: image.Body.toString('base64')});
   } catch (e) {
     console.log(e.stack);
@@ -43,7 +43,7 @@ module.exports.createTemplate = async event => {
     const base64Data = new Buffer.from(payload.data.replace(/^data:image\/\w+;base64,/, ""), 'base64');
     const type = payload.data.split(';')[0].split('/')[1];
     const params = {
-      Bucket: BUCKET_NAME+'/faces',
+      Bucket: BUCKET_NAME,
       Key: payload.name,
       Body: base64Data,
       ContentEncoding: 'base64',

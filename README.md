@@ -41,7 +41,7 @@ Assume you have AWS account and credentials
 ```
 cd back-end
 npm install
-sls serverless start
+sls offline start --bucket your_bucket_name
 ```
 4. Run Front end
 ```
@@ -50,6 +50,9 @@ npm install
 ng serve
 ```
 5. Open the browser at http://localhost:4200
+
+More information about Back end and Front end is in README files of each component
+
 #### Test the same application online
 1. Go to this site: https://prosopa.info
 2. Select an image from a dropdown
