@@ -16,7 +16,7 @@ module.exports.getImageList = async () => {
   try {
     const s3list = await s3.listObjects(s3Config).promise();
     const imgList = s3list.Contents
-      .filter(img => img.Key.indexOf('png') > 0)
+      .filter(img => img.Key.indexOf('png') > 0 || img.Key.indexOf('jpeg') > 0 || img.Key.indexOf('jpg') > 0)
       .map(img => img.Key.split('/')[1]);
     // let imagesPromises = [];
     // let resultimages = [];
@@ -67,16 +67,17 @@ module.exports.getImage = async event => {
 module.exports.createTemplate = async event => {
   try {
     const payload = JSON.parse(event.body);
-    const image = new Image(payload.imageData, null, payload.key);
-    const template = new Template();
-    if(!image.imageData || !isBase64(image.imageData, { mimeRequired: true })) {
-      console.log('Empty or Invalid Image Base64!');
-      return response.rsResponse(400, 'Could not process Image base64');
-    } else {
-      template.template = image.imageData;
-      
-      return response.rsResponse(200, template);
-    }
+    const base64Data = new Buffer.from(payload.data.replace(/^data:image\/\w+;base64,/, ""), 'base64');
+    const type = payload.data.split(';')[0].split('/')[1];
+    const params = {
+      Bucket: BUCKET_NAME+'/faces',
+      Key: payload.name,
+      Body: base64Data,
+      ContentEncoding: 'base64',
+      ContentType: `image/${type}`
+    };
+    await s3.upload(params).promise();
+    return response.rsResponse(200, {message: "Uploaded Successfully"});
   } catch (e) {
     console.log(e.stack);
     return response.rsResponse(500, 'Internal Server Error');

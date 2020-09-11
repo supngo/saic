@@ -22,4 +22,8 @@ export class ImageService {
   analyzeImages(singleTemplate: string, templateList: string []) {
     return this.http.post(`${environment.apiUrl}compare-list`, {SingleTemplate: singleTemplate, TemplateList: templateList })
   }
+
+  uploadImage(data: string | ArrayBuffer, name: string) {
+    return this.http.post(`${environment.apiUrl}create-template`, {data: data, name: name})
+  }
 }

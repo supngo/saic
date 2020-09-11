@@ -4,7 +4,6 @@ import { Image } from '../models/Image.model';
 import { forkJoin } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
   selector: 'app-face-compare',
   templateUrl: './face-compare.component.html',
@@ -30,7 +29,9 @@ export class FaceCompareComponent implements OnInit {
       this.isLoaded = true;
       response.images.forEach(image => this.images.push({prefix: 'faces', key: image, bucket: this.bucketName, data: null}));
       this.spinner.hide();
-    });
+    },
+    err => {this.spinner.hide();}
+    );
   }
 
   selectImage(imageName): void {
@@ -39,8 +40,9 @@ export class FaceCompareComponent implements OnInit {
     this.targetImages = [];
     this.sourceImage = imageName;
     this.imageService.getImage(imageName).subscribe((response: any) => {
+      const type = imageName.slice(imageName.lastIndexOf('.')+1);
       this.isLoaded = true;
-      this.imageBase64 = 'data:image/png;base64,'+response.image;
+      this.imageBase64 = `data:image/${type};base64,${response.image}`;
       this.spinner.hide();
     });
   }

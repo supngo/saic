@@ -1,0 +1,20 @@
+<ngx-spinner></ngx-spinner>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="alert alert-success" role="alert" *ngIf="message.length > 0 && message.indexOf('Error') < 0">{{message}}</div>
+          <div class="alert alert-danger" role="alert" *ngIf="message.indexOf('Error') > -1">{{message}}</div>
+          <div>
+            <input type="file" (change)="onChange($event)">
+          </div>
+          <br>
+          <div>
+            <button class="btn btn-primary"(click)="submit()">Upload</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

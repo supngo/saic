@@ -9,12 +9,14 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FaceCompareComponent } from './face-compare/face-compare.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     FaceCompareComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,
