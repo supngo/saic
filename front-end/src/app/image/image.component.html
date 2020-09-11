@@ -11,7 +11,7 @@
           </div>
           <br>
           <div>
-            <button class="btn btn-primary"(click)="submit()">Upload</button>
+            <button class="btn btn-primary"(click)="submit()" [disabled]="!hasImage">Upload</button>
           </div>
         </div>
       </div>

@@ -25,14 +25,15 @@ Deploying this set up on AWS is also a easy thinking process. AWS offers so many
 
 ### Infrastructure:
 1. S3 for static hosting website and image storage
-2. CloudFront for CDN which improve performance by regional caching
-3. Route53 for Domain name and traffic routing
-4. ACM for SSL certificate and secure HTTP traffic
-5. Lambda for serverless deployment which provides scalability and availability 
-6. IAM for permission and cloud security
+2. API Gateway for routing traffic from internet to AWS Lambda
+3. CloudFront for CDN which improve performance by regional caching
+4. Route53 for Domain name and routing traffic to CloudFront
+5. ACM for SSL certificate and secure HTTP traffic
+6. Lambda for serverless deployment which provides scalability and availability 
+7. IAM for permission and cloud security
 
 ### Explore (Run and Test)
-1. Go to this site: https://prosopa.com
+1. Go to this site: https://prosopa.info
 2. Select an image from a dropdown
 3. Click ***Analyze*** to run Face Recognition against other images
 4. Click ***Upload*** to go to upload page

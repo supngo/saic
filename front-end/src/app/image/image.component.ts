@@ -12,8 +12,7 @@ export class ImageComponent implements OnInit {
   data: string | ArrayBuffer;
   isLoaded = false;
   message: string;
-  name: string;
-  contentType: string;
+  hasImage = false;
   constructor(private spinner: NgxSpinnerService, private imageService: ImageService) { }
 
   ngOnInit(): void {
@@ -36,12 +35,17 @@ export class ImageComponent implements OnInit {
   }
 
   onChange(event) {
-    this.image = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(this.image);
-    reader.onload = () => {
-      this.spinner.hide();
-      this.data = reader.result;
-    };
+    if(event.target.files[0]) {
+      this.hasImage = true;
+      this.image = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.spinner.hide();
+        this.data = reader.result;
+      };
+    } else {
+      this.hasImage = false;
+    }
   }
 }
