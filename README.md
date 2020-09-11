@@ -34,6 +34,7 @@ Deploying this set up on AWS is also a easy thinking process. AWS offers so many
 
 ### Explore (Run and Test)
 #### Run Locally
+Assume you have AWS account and credentials
 1. Checkout the source code at https://github.com/supngo/saic.git
 2. Open the terminal at the checked out folder
 3. Run Back end
